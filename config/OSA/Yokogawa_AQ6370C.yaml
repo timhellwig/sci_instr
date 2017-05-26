@@ -1,0 +1,17 @@
+spec: "1.0"
+
+readOnlyProps:
+    name        : '*IDN'
+
+readWriteProps:
+    startwl     : :SENS:WAV:STAR
+    stopwl      : :SENS:WAV:STOP
+    span        : :SENS:WAV:SPAN
+    centerwl    : :SENS:WAV:CENT
+    bandwidth   : :SENS:BAND:RES
+    points      : :SENS:SWE:POIN
+    sweepmode   : :INIT:SMOD 
+
+readBinaryTraces:
+    wavelength  : :TRAC:X
+    data        : :TRAC:Y

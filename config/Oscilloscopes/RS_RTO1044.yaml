@@ -1,0 +1,42 @@
+spec: "1.0"
+
+readOnlyProps:
+    name        : '*IDN'
+
+readWriteProps:
+    points      : ':ACQuire:POINts:AUTO RECLength;:ACQuire:POINts'
+    resolution  : ':ACQuire:POINts:AUTO RESolution;:ACQuire:RESolution'
+    time_range  : :TIMebase:RANGe
+    time_scale  : :TIMebase:SCALe
+    time_ref    : :TIMebase:REFerence
+    time_pos    : :TIMebase:POS
+    
+    ch1_position: :CHAN1:POS
+    ch1_offset  : :CHAN1:OFFS
+    ch1_range   : :CHAN1:RANG
+    ch1_triglvl : :TRIG:LEV1
+
+    
+    ch2_position: :CHAN2:POS
+    ch2_offset  : :CHAN2:OFFS
+    ch2_range   : :CHAN2:RANG
+    ch2_triglvl : :TRIG:LEV2
+
+    
+    ch3_position: :CHAN3:POS
+    ch3_offset  : :CHAN3:OFFS
+    ch3_range   : :CHAN3:RANG
+    ch3_triglvl : :TRIG:LEV3
+
+    
+    ch4_position: :CHAN4:POS
+    ch4_offset  : :CHAN4:OFFS
+    ch4_range   : :CHAN4:RANG
+    ch4_triglvl : :TRIG:LEV4
+
+
+readBinaryTraces:
+    ch1_data    : :CHAN1:WAV1:DATA
+    ch2_data    : :CHAN2:WAV1:DATA
+    ch3_data    : :CHAN3:WAV1:DATA
+    ch4_data    : :CHAN4:WAV1:DATA
