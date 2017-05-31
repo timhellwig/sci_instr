@@ -79,8 +79,13 @@ class Instrument:
         def make_read_binary_instr_data(prop):
             """ Getter for binary arrays"""
             
-            def getter( self ):
-                return self._visa.query_values(self._readBinaryTraces[prop]+self._getString)
+            #Sometimes we need a suffix to address the different traces
+            if type(self._readBinaryTraces['wavelength']) is dict:
+                def getter( self ):
+                    return self._visa.query_values(self._readBinaryTraces[prop]['command']+self._getString+' '+self._readBinaryTraces[prop]['suffix'])
+            else:
+                def getter( self ):
+                    return self._visa.query_values(self._readBinaryTraces[prop]+self._getString)
             return property(getter)
             
 

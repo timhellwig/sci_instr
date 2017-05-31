@@ -13,5 +13,9 @@ readWriteProps:
     sweepmode   : :INIT:SMOD 
 
 readBinaryTraces:
-    wavelength  : :TRAC:X
-    data        : :TRAC:Y
+    wavelength  :
+     command    : :TRAC:X
+     suffix     : TRA
+    data        :
+     command    : :TRAC:Y
+     suffix     : TRA
