@@ -80,7 +80,7 @@ class Instrument:
             """ Getter for binary arrays"""
             
             #Sometimes we need a suffix to address the different traces
-            if type(self._readBinaryTraces['wavelength']) is dict:
+            if type(self._readBinaryTraces[prop]) is dict:
                 def getter( self ):
                     return self._visa.query_values(self._readBinaryTraces[prop]['command']+self._getString+' '+self._readBinaryTraces[prop]['suffix'])
             else:

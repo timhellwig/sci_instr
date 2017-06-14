@@ -11,7 +11,7 @@ __author__ = 'Tim Hellwig'
 import sci_instr.generic
 import os
 import re
-
+import visa
 
 
 class Katana(sci_instr.generic.Instrument):
@@ -36,6 +36,10 @@ class Katana(sci_instr.generic.Instrument):
         
         self._visa.baud_rate = 19200
         self._visa.encoding='windows-1252'
+        
+        # flush the read buffer as the katana seems to be stuck in a
+        # debug output sometimes
+        self._visa.flush(visa.constants.VI_READ_BUF_DISCARD)
 
 
     def _process_read_values(self,msg):
@@ -59,6 +63,23 @@ class Katana(sci_instr.generic.Instrument):
             out = out + self._visa.read()
                                    #join them to one byte String
         print(out)  #decode the byte String into something printable
+        
+
+class TL_PM100(sci_instr.generic.Instrument):
+    """Allows easy communication with Thorlabs Powermeters PM100
+    
+    """  
+
+    def __init__(self,visa_rm,address):
+        
+        
+        """Call generic init to connect and prepare instrument"""
+        super(TL_PM100, self).__init__(visa_rm,address,conffile=os.path.join('Misc','TL_PM100.yaml'))
+        
+        
+        
+        
+
      
 
             

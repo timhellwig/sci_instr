@@ -1,0 +1,9 @@
+spec: "1.0"
+
+readOnlyProps:
+   
+readWriteProps:
+    power        : 'MEAS:POW'
+    wavelength   : 'CORR:WAV'
+
+readBinaryTraces:

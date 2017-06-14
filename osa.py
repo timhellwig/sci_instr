@@ -15,7 +15,7 @@ import numpy as np
 class AQ6370C(sci_instr.generic.Instrument):
     """Allows easy communication with Yokogawa OSA AQ6370C
     
-	Note: At the moment the trace is hardcoded to be A: TRA
+    Note: Does only work when active trace is TRA
     """  
     
     def __init__(self,visa_rm,address):

@@ -2,6 +2,7 @@ spec: "1.0"
 
 readOnlyProps:
     name        : '*IDN'
+    Meas1       : 'MEASurement1:RESult'
 
 readWriteProps:
     points      : ':ACQuire:POINts:AUTO RECLength;:ACQuire:POINts'
