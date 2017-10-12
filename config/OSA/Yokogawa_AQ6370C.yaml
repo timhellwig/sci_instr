@@ -4,13 +4,24 @@ readOnlyProps:
     name        : '*IDN'
 
 readWriteProps:
-    startwl     : :SENS:WAV:STAR
-    stopwl      : :SENS:WAV:STOP
+    startwl     :
+        command     : :SENS:WAV:STAR
+        min_value   : 600.0e-9
+        max_value   : 1700.0e-9
+    stopwl      :
+        command     : :SENS:WAV:STOP
+        min_value   : 600.0e-9
+        max_value   : 1700.0e-9
+    sweepmode   : 
+        command     : :INIT:SMOD 
+        doc_string  : 'Sets sweepmode: 1 = Single, 2 = Repeat, 3 = Auto, Needs a self.start_sweep() to take effect'
+        
     span        : :SENS:WAV:SPAN
     centerwl    : :SENS:WAV:CENT
     bandwidth   : :SENS:BAND:RES
     points      : :SENS:SWE:POIN
-    sweepmode   : :INIT:SMOD 
+    
+
 
 readBinaryTraces:
     wavelength  :

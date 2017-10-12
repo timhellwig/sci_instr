@@ -1,0 +1,22 @@
+spec: "1.0"
+
+readOnlyProps:
+    name        : '*IDN'
+
+readWriteProps:
+    center      : ':SENSe:FREQuency:CENTer'
+    span        : ':SENSe:FREQuency:SPAN'
+    start       : ':SENSe:FREQuency:STARt'
+    stop        : ':SENSe:FREQuency:STOP'
+    bandwidth   : ':SENSe:BANDwidth:RESolution'
+    markerX     : ':CALCulate:MARKer:X'
+    markerY     : ':CALCulate:MARKer:Y'
+    trace_type  : ':TRACe:TYPE'
+    points      : ':CHP:SWE:POIN'
+
+
+readBinaryTraces:
+    data1       :
+        command : 'TRAC'
+        suffix  : 'Trace1'
+    

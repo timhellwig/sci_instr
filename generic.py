@@ -53,21 +53,88 @@ class Instrument:
             """Getter and setter dynamically for read write
             properties"""
             
-            def getter( self ):
-                return self._process_read_values(self._visa.query(self._readWriteProps[prop]+self._getString))
-            def setter( self,value ):
-                self._visa.write(self._readWriteProps[prop]+self._setString+self._formatString.format(value))
-                if self._expctResponse is not None:
-                    response = self._visa.read()
-                    if not response == self._expctResponse:
-                        msg = 'Response was: {}; expected: {}'.format(response,self._expctResponse)
+            options = {}
+            options['doc_string'] = ''
+            options['suffix']  = ''
+            options['min_value'] = None
+            options['max_value'] = None
+            options['allowed_values'] = None
+            options['value_type'] = 'float'
+            
+            
+            #Simple format for this property?
+            if not(type(self._readWriteProps[prop]) is dict):
+                
+                visa_string_get = self._readWriteProps[prop]+self._getString
+                visa_string_set = self._readWriteProps[prop]+self._setString+self._formatString
+                
+                def getter( self ):
+                    return self._process_read_values(self._visa.query(visa_string_get),options['value_type'])
+                def setter( self,value ):
+                    self._visa.write(visa_string_set.format(value))
+                    if self._expctResponse is not None:
+                        response = self._visa.read()
+                        if not response == self._expctResponse:
+                            msg = 'Response was: {}; expected: {}'.format(response,self._expctResponse)
+                            raise AttributeError(msg)
+                
+                    retvalue = self.__getattribute__(prop)
+                    if not value == retvalue:
+                        msg = 'Set value: {}; returned value: {}'.format(value,retvalue)
                         raise AttributeError(msg)
-               
-                retvalue = self.__getattribute__(prop)
-                if not value == retvalue:
-                    msg = 'Set value: {}; returned value: {}'.format(value,retvalue)
-                    raise AttributeError(msg)
-            return property(getter,setter)
+                
+            # Complex format readWriteProps[prop] is a dictionary with additional information
+            else:
+                prop_dict = self._readWriteProps[prop]
+                
+                # First check for command as this is needed
+                if 'command' in prop_dict:
+                    command = prop_dict['command']
+                else:
+                    raise AttributeError('No Command specified for property ' + prop)
+                
+                #Check if any other known option is present
+                for value in (('doc_string','suffix','value_type','allowed_values','min_value','max_value')):
+                    if  value in prop_dict:
+                     options[value] = prop_dict[value]
+                
+                visa_string_get = command+self._getString + ' ' + options['suffix']
+                visa_string_set = command+self._setString + ' ' + options['suffix'] + self._formatString
+                
+                def getter( self ):
+                    return self._process_read_values(self._visa.query(visa_string_get),options['value_type'])
+                    
+                def setter( self,value ):
+                    #first check if value is within allowed values
+                    if not(options['allowed_values'] is None):
+                        if not(value in options['allowed_values']):
+                            msg = 'Tried to set: {}; allowed only: {}'.format(value,options['allowed_values'])
+                            raise AttributeError(msg)
+                    
+                    #check if value is within min/max
+                    if not(options['min_value'] is None):
+                        if value <= options['min_value']:
+                            msg = 'Tried to set: {}; allowed only values >= {}'.format(value,options['min_value'])
+                            raise AttributeError(msg)
+                    if not(options['max_value'] is None):
+                        if value >= options['max_value']:
+                            msg = 'Tried to set: {}; allowed only values <= {}'.format(value,options['max_value'])
+                            raise AttributeError(msg)
+                    
+                    self._visa.write(visa_string_set.format(value))
+                    if self._expctResponse is not None:
+                        response = self._visa.read()
+                        if not response == self._expctResponse:
+                            msg = 'Response was: {}; expected: {}'.format(response,self._expctResponse)
+                            raise AttributeError(msg)
+                
+                    retvalue = self.__getattribute__(prop)
+                    if not value == retvalue:
+                        msg = 'Set value: {}; returned value: {}'.format(value,retvalue)
+                        raise AttributeError(msg)
+                
+                
+            return property(getter,setter,doc = options['doc_string'])
             
         def make_read_only_instr_prop(prop):
             """ Getter for read only properties"""
@@ -100,9 +167,14 @@ class Instrument:
             
 
 
-    def _process_read_values(self,string):
+    def _process_read_values(self,string,value_type):
         """Usually we expect returning a float; inhereted classes can specify"""
-        return float(string)
+        if value_type == 'float':
+            return float(string)
+        elif value_type == 'int':
+            return int(string)
+        else:
+            return string
 
     def is_ready(self):
         """ Query the instrument whether it has succesfully completed
