@@ -81,7 +81,7 @@ print(osc.time_range)
 
 * **Tim Hellwig** - *Initial work* -
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/timhellwig/sci_instr/contributors) who participated in this project.
 
 ## License
 
