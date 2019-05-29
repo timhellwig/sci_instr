@@ -1,0 +1,10 @@
+spec: "1.0"
+
+readOnlyProps:
+   
+readWriteProps:
+    pumpCurrent : ldc
+    frequency   : f
+    laser       : ld
+
+readBinaryTraces:
