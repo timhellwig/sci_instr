@@ -1,0 +1,24 @@
+spec: "1.0"
+
+
+readOnlyProps:
+    name        : '*IDN'
+
+
+readWriteProps:
+    yscale      : WFMOUTPRE:YMULT
+    yoffset     : WFMOUTPRE:yzero       # offset of waveform in units specified by 'unit' command
+    doffset     : WFMOUTPRE:yoff        # vertical position of waveform in digitizing levels
+    yunit       : WFMOUTPRE:YUNIT
+    
+    xincrement  : WFMOUTPRE:XINCR
+    xunit       : WFMOUTPRE:XUNIT
+    
+    points      : HORIZONTAL:ACQLENGTH
+    
+    channel     : DATA:SOURCE
+
+
+readBinaryTraces:
+    curve       : CURVE
+    nextcurve   : CURVENEXT

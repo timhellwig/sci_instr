@@ -1,0 +1,60 @@
+spec: "1.0"
+
+readOnlyProps:
+    meas_mainAmp_FOPO_current: Meas:MainAmp:FOPO:Current
+    meas_mainAmp_FOPO_temp   : Meas:MainAmp:FOPO:Temperature
+    meas_mainAmp_Stokes_current:   Meas:MainAmp:Stokes:Current
+    meas_mainAmp_Stokes_temp   :   Meas:MainAmp:Stokes:Temperature
+   
+readWriteProps:
+    enable_oscillator     : 
+            command: Laser:Enable:Oscillator
+            value_type: int
+            allowed_values: [0, 1]
+    enable_amplifiers     : 
+            command: Laser:Enable:Amplifiers
+            value_type: int
+            allowed_values: [0, 1]
+    stokes_power      : 
+            command: Laser:Set:StokesPower
+            value_type: int
+            min_value: 0
+            max_value: 100
+    wavenumber      : 
+            command: Laser:Set:Wavenumber
+            value_type: int
+			allowed_values: [705, 1580, 1650, 2080, 2110, 2200, 2250, 2845, 2950]
+	tune_current : 
+	        command: Laser:Oscillator:FineTune:Current
+	        value_type: int
+	        min_value: -20
+	        max_value: 20
+	tune_wavelength : 
+	        command: Laser:Oscillator:FineTune:Wavelength
+	        value_type: float
+	        min_value: -0.1
+	        max_value: 0.1
+
+
+            
+    _oscillator_wavelength   : Laser:Oscillator:Wavelength
+    _oscillator_galvo        : 
+            command: Laser:Oscillator:Galvo
+            value_type: int
+    
+    _mainAmp_FOPO_enable     : 
+            command: Laser:MainAmp:FOPO:Enable
+            value_type: int
+            allowed_values: [0, 1]
+    _mainAmp_Yb_enable     : 
+            command: Laser:MainAmp:Ytterbium:Enable
+            value_type: int
+            allowed_values: [0, 1]
+                
+    _mainAmp_FOPO_current    : Laser:MainAmp:FOPO:Current
+    _mainAmp_Yb_current    : Laser:MainAmp:Ytterbium:Current
+    
+
+
+
+readBinaryTraces:

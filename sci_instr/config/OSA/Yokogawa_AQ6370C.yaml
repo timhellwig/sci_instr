@@ -15,6 +15,7 @@ readWriteProps:
     sweepmode   : 
         command     : :INIT:SMOD 
         doc_string  : 'Sets sweepmode: 1 = Single, 2 = Repeat, 3 = Auto, Needs a self.start_sweep() to take effect'
+        allowed_values: [1,2,3]
         
     span        : :SENS:WAV:SPAN
     centerwl    : :SENS:WAV:CENT
@@ -30,3 +31,45 @@ readBinaryTraces:
     data        :
      command    : :TRAC:Y
      suffix     : TRA
+    TraceA      :
+     command    : :TRAC:Y
+     suffix     : TRA
+    wlA  :
+     command    : :TRAC:X
+     suffix     : TRA
+    TraceB        :
+     command    : :TRAC:Y
+     suffix     : TRB
+    wlB  :
+     command    : :TRAC:X
+     suffix     : TRB
+    wlC  :
+     command    : :TRAC:X
+     suffix     : TRC
+    TraceC        :
+     command    : :TRAC:Y
+     suffix     : TRC
+    wlD  :
+     command    : :TRAC:X
+     suffix     : TRD
+    TraceD        :
+     command    : :TRAC:Y
+     suffix     : TRD
+    wlE  :
+     command    : :TRAC:X
+     suffix     : TRE
+    TraceE        :
+     command    : :TRAC:Y
+     suffix     : TRE
+    wlF  :
+     command    : :TRAC:X
+     suffix     : TRF
+    TraceF        :
+     command    : :TRAC:Y
+     suffix     : TRF
+    wlG  :
+     command    : :TRAC:X
+     suffix     : TRG
+    TraceG        :
+     command    : :TRAC:Y
+     suffix     : TRG

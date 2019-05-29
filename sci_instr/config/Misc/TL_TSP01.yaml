@@ -1,0 +1,11 @@
+spec: "1.0"
+
+readOnlyProps:
+   
+readWriteProps:
+    temperature_int         : 'SENSe1:DATA'
+    temperature_ext1        : 'SENSe3:DATA'
+    temperature_ext2        : 'SENSe4:DATA'
+    humidity   : 'SENSe2:DATA'
+
+readBinaryTraces:

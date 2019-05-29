@@ -1,9 +1,16 @@
 spec: "1.0"
 
 readOnlyProps:
+    sensor       : 'Syst:SENS:IDN'
+    id           : '*IDN'
    
 readWriteProps:
     power        : 'MEAS:POW'
     wavelength   : 'CORR:WAV'
+    range        : 'SENS:POW:RANG:UPP'
+    auto_range   : 
+        command :  'SENS:POW:RANG:AUTO'
+        value_type: int
+        allowed_values: [0, 1]
 
 readBinaryTraces:

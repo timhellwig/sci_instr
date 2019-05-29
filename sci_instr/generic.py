@@ -45,7 +45,6 @@ class Instrument:
             self._readBinaryTraces=cfg['readBinaryTraces']        
         
         _rm = visa_rm
-        
         self._visa = _rm.open_resource(address)
         self._visa.values_format.use_binary('f', False, np.array)
 
@@ -56,6 +55,7 @@ class Instrument:
             options = {}
             options['doc_string'] = ''
             options['suffix']  = ''
+            options['value_unit']=''
             options['min_value'] = None
             options['max_value'] = None
             options['allowed_values'] = None
@@ -94,12 +94,12 @@ class Instrument:
                     raise AttributeError('No Command specified for property ' + prop)
                 
                 #Check if any other known option is present
-                for value in (('doc_string','suffix','value_type','allowed_values','min_value','max_value')):
+                for value in (('doc_string','suffix','value_type','allowed_values','min_value','max_value','value_unit')):
                     if  value in prop_dict:
                      options[value] = prop_dict[value]
                 
                 visa_string_get = command+self._getString + ' ' + options['suffix']
-                visa_string_set = command+self._setString + ' ' + options['suffix'] + self._formatString
+                visa_string_set = command+self._setString + ' ' + options['suffix'] + self._formatString + options['value_unit']
                 
                 def getter( self ):
                     return self._process_read_values(self._visa.query(visa_string_get),options['value_type'])
@@ -155,8 +155,6 @@ class Instrument:
                     return self._visa.query_values(self._readBinaryTraces[prop]+self._getString)
             return property(getter)
             
-
-
         # add all the properties
         for i in self._readOnlyProps or {}:
             setattr(self.__class__, i, make_read_only_instr_prop(i))
@@ -164,8 +162,6 @@ class Instrument:
             setattr(self.__class__, i, make_instr_prop(i))
         for i in self._readBinaryTraces or {}:
             setattr(self.__class__, i, make_read_binary_instr_data(i))
-            
-
 
     def _process_read_values(self,string,value_type):
         """Usually we expect returning a float; inhereted classes can specify"""
@@ -181,13 +177,11 @@ class Instrument:
         all operations"""
         
         return True
-        
-        
+                
     def __del__(self):
         if self._visa is not None:
             self._visa.close()
-            
-        
+                    
 if __name__ == "__main__":
     b = Instrument(visa.ResourceManager('@sim'),'ASRL2::INSTR')
     

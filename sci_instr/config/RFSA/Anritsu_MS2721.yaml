@@ -11,13 +11,12 @@ readWriteProps:
     bandwidth   : ':SENSe:BANDwidth:RESolution'
     markerX     : ':CALCulate:MARKer:X'
     markerY     : ':CALCulate:MARKer:Y'
-    trace_type  : ':TRACe:TYPE'
-    points      : ':CHP:SWE:POIN'
+
     
 
 
 readBinaryTraces:
     data1       :
         command : 'TRAC'
-        suffix  : 'Trace1'
+        suffix  : '1'
     

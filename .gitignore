@@ -1,0 +1,6 @@
+
+*.pyc
+sci_instr.egg-info/top_level.txt
+sci_instr.egg-info/SOURCES.txt
+sci_instr.egg-info/PKG-INFO
+sci_instr.egg-info/dependency_links.txt

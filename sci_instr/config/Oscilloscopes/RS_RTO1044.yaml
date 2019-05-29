@@ -3,6 +3,10 @@ spec: "1.0"
 readOnlyProps:
     name        : '*IDN'
     Meas1       : 'MEASurement1:RESult'
+    Meas1_RMS   : 'MEASurement1:RESult:RMS'
+    Meas1_STD   : 'MEASurement1:RESult:STDDev'
+    Meas2_RMS   : 'MEASurement2:RESult:RMS'
+    Meas2_STD   : 'MEASurement2:RESult:STDDev'
 
 readWriteProps:
     points      : ':ACQuire:POINts:AUTO RECLength;:ACQuire:POINts'
@@ -10,7 +14,7 @@ readWriteProps:
     time_range  : :TIMebase:RANGe
     time_scale  : :TIMebase:SCALe
     time_ref    : :TIMebase:REFerence
-    time_pos    : :TIMebase:POS
+    time_pos    : :TIMebase:HOR:POS
     
     ch1_position: :CHAN1:POS
     ch1_offset  : :CHAN1:OFFS

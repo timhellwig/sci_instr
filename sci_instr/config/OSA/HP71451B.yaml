@@ -1,0 +1,26 @@
+spec: "1.0"
+
+readOnlyProps:
+    name        : '*IDN'
+
+
+readWriteProps:
+    points      :
+        command : TRDEF TRA,
+        value_type: int
+    span :
+        command: SP
+        value_unit: 'NM;'
+        doc_string: 'Set sweep width of 1 division in nm!'
+    centerwl    : 
+        command: CENTERWL
+        value_unit: 'NM;'
+        doc_string: 'Set center wavelength in nm!'
+    bandwidth   : 
+        command: RB
+        allowed_values: [10,5,2,1,0.5,0.2,0.1,0.008]
+        value_unit: 'NM;'
+   
+readBinaryTraces:
+    data        : 'TRA'
+   
