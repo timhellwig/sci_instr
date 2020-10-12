@@ -4,7 +4,7 @@
 
 __author__ = 'Tim Hellwig'
 
-import visa 
+import pyvisa as visa 
 import numpy as np
 import os
 import yaml
@@ -46,7 +46,12 @@ class Instrument:
         
         _rm = visa_rm
         self._visa = _rm.open_resource(address)
-        self._visa.values_format.use_binary('f', False, np.array)
+        self._binary_datatype = 'f'
+        self._binary_big_endian = False
+        self._binary_container = np.array
+        self._binary_data_points = 0
+        self._binary_header_fmt = 'ieee'
+        
 
         def make_instr_prop(prop):
             """Getter and setter dynamically for read write
@@ -149,10 +154,20 @@ class Instrument:
             #Sometimes we need a suffix to address the different traces
             if type(self._readBinaryTraces[prop]) is dict:
                 def getter( self ):
-                    return self._visa.query_values(self._readBinaryTraces[prop]['command']+self._getString+' '+self._readBinaryTraces[prop]['suffix'])
+                    return self._visa.query_binary_values(self._readBinaryTraces[prop]['command']+self._getString+' '+self._readBinaryTraces[prop]['suffix'],
+                                                          datatype = self._binary_datatype,
+                                                          is_big_endian = self._binary_big_endian,
+                                                          container = self._binary_container,
+                                                          data_points = self._binary_data_points,
+                                                          header_fmt = self._binary_header_fmt)
             else:
                 def getter( self ):
-                    return self._visa.query_values(self._readBinaryTraces[prop]+self._getString)
+                    return self._visa.query_binary_values(self._readBinaryTraces[prop]+self._getString,
+                                                          datatype = self._binary_datatype,
+                                                          is_big_endian = self._binary_big_endian,
+                                                          container = self._binary_container,
+                                                          data_points = self._binary_data_points,
+                                                          header_fmt = self._binary_header_fmt)
             return property(getter)
             
         # add all the properties

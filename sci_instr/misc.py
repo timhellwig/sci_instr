@@ -15,35 +15,6 @@ import visa
 import numpy as np
 
 
-class Refined0X(sci_instr.generic.Instrument):
-    """Allows easy communication with Refined Lasers 0X
-    
-    answers with "ACK" to each setting change!
-    
-    """  
-
-    _expctResponse = 'ACK'
-    
-    def __init__(self,visa_rm,address):
-       
-        """Call generic init to connect and prepare instrument"""
-        super(Refined0X, self).__init__(visa_rm,address,conffile=os.path.join('Misc','Refined0X.yaml'))
-        
-        self._visa.read_termination = '\r'
-        self._visa.write_termination = '\r'
-        
-
-        
-    def _process_read_values(self,string,value_type):
-        """Look for int or float values"""
-        
-        #print(msg)
-        if value_type == 'float':
-           return round(float(string),4)
-        elif value_type == 'int':
-            return int(string)
-        else:
-            return string
 
         
 

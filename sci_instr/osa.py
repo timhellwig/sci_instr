@@ -26,7 +26,10 @@ class AQ6370C(sci_instr.generic.Instrument):
         
         self._visa.write(':init:smode 0;*CLS;:init')
         self._visa.write(':FORMat:DATA REAL,64')
-        self._visa.values_format.use_binary('d', False, np.array)
+        self._binary_datatype = 'd'
+        self._binary_big_endian = False
+        self._binary_container = np.array
+
         
     def start_sweep(self):
         """Sends the trigger to start a sweep"""

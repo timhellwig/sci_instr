@@ -7,6 +7,7 @@ readOnlyProps:
     Meas1_STD   : 'MEASurement1:RESult:STDDev'
     Meas2_RMS   : 'MEASurement2:RESult:RMS'
     Meas2_STD   : 'MEASurement2:RESult:STDDev'
+    Meas2       : 'MEASurement2:RESult'
 
 readWriteProps:
     points      : ':ACQuire:POINts:AUTO RECLength;:ACQuire:POINts'
